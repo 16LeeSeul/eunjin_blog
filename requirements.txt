@@ -1,3 +1,4 @@
+django-allauth==0.39.1
 dj-database-url==0.5.0
 Django==2.1.5
 gunicorn==19.9.0
