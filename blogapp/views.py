@@ -23,7 +23,7 @@ def home(request):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)
-    return render(request, 'detail.html', {'blog':blog_detail})
+    return render(request, 'detail.html', {'details':blog_detail})
 
 # home에서는 하나밖에 없지만 
 # detail은 여러 개니까 특정 번호의 객체를 담을 수 있어야한다.
@@ -44,19 +44,3 @@ def create(request):#입력받은 내용을 db에 넣어주는 함수
 #redirect와 render의 차이
 #redirect는 url을 받음 http://google.com 가능
 #render는 3번째 인수를 가지고 프로젝트내에서 사용함
-
-def blogpost(request):
-    # 1. 입력된 내용을 처리하는 기능 -> (method로 구분) POST
-    if request.method == 'POST':
-        form = BlogPost(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            #model을 반환하데 저장하지 않고 반환해줌 commit=False
-            post.pub_date = timezone.now()
-            #title,body만 form으로 post로 반환해주고 시간은 아님
-            post.save()
-            return redirect('blog')
-    # 2. 빈 페이지를 띄워주는 기능 -> GET
-    else :
-        form = BlogPost()
-        return render(request, 'new.html', {'form':form})
