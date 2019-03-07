@@ -5,16 +5,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-
-        <style>
-        .center{
-            display: table; margin-left: auto; margin-right: auto; 
-        
-            font-size: 15px;
-        }
-        </style>
-
 </head>
 
 
@@ -64,55 +54,23 @@
 
 
         <div class="alert alert-success" role="alert">
-           Here are many writings. Do you want some? <a href="/blog/new" class="alert-link">Go to New Writing</a>. Give it a click if you like.
+           Here is your writing space. Enjoy yourself!
         </div>
 
-<div class="center">
-<table class="table table-hover" style="width:1000px;">
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">TITLE</th>
-        <th scope="col">CONTENT</th>
-        <th scope="col">TIME</th>
 
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for blog in posts %}
-        <tr>
-        <th scope="row">{{blog.number}}</th>
-        <td><a href="{% url 'detail' blog.id %}" >{{blog.title}}</a></td>
-        <td>{{blog.summary}}</td>
-        <td>{{blog.pub_date}}</td>
-
-        </tr>
-        {% endfor %}
-        
-    </tbody>
-</table>
-
-        <a class="btn btn-primary" href="/blognew/" role="button"style="float: right;">Write New</a>
-
-<br><br>
-<div class="center">
-    <nav aria-label="Page navigation example" style="font-size:10px;">
-        <ul class="pagination">
-            {% if posts.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{posts.previous_page_number}}">Previous</a></li>
-            {% endif %}
+        <form action="{% url 'create' %}">
+            <div class="form-group">
+              <label>Title</label>
+              <input class="form-control" name="title">
+            </div>
             
+            <div class="form-group">
+              <label>Contents</label>
+              <textarea class="form-control" name="body"rows="3"></textarea>
+              <br>
+              <input class="btn btn-dark" type="submit" value="제출하기">
 
-            <li class="page-item"><a class="page-link" href="#">{{ posts.number }}</a></li>
-            <li class="page-item"><a class="page-link" href="#">of</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a></li>
-            {% if posts.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{posts.next_page_number}}">Next</a></li>
-            {% endif %}
-
-        </ul>
-    </nav>
-</div>    
-</div>
-</body>
+            </div>
+            <br>
+          </form>
+    
